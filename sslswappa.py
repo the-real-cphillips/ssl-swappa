@@ -5,37 +5,6 @@ import sys
 from termcolor import colored, cprint
 
 
-parser = argparse.ArgumentParser(description="Swap ACM Certs on an ELB")
-
-parser.add_argument('-r', '--region',
-                    dest='region',
-                    action='store',
-                    default='us-west-2',
-                    help="Specify region, default is us-west-2")
-parser.add_argument('-p', '--port',
-                    dest='port',
-                    action='store',
-                    default=443,
-                    type=int,
-                    help="Specify Listener port, default is 443")
-parser.add_argument('-a', '--account_number',
-                    dest='account_number',
-                    action='store',
-                    required=True,
-                    help="AWS Account Number")
-parser.add_argument('-c', '--cert_id',
-                    dest='cert_id',
-                    action='store',
-                    required=True,
-                    help="ACM Certificate ID")
-parser.add_argument('-e', '--elb_name',
-                    dest='elb_name',
-                    action='store',
-                    required=True,
-                    help="AWS ELB Name")
-
-args = parser.parse_args()
-
 client = boto3.client('elb', region_name=args.region)
 
 def swap_ssl(elb_name, port, account_number, cert_id, region):
@@ -68,4 +37,35 @@ def main():
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Swap ACM Certs on an ELB")
+    
+    parser.add_argument('-r', '--region',
+                        dest='region',
+                        action='store',
+                        default='us-west-2',
+                        help="Specify region, default is us-west-2")
+    parser.add_argument('-p', '--port',
+                        dest='port',
+                        action='store',
+                        default=443,
+                        type=int,
+                        help="Specify Listener port, default is 443")
+    parser.add_argument('-a', '--account_number',
+                        dest='account_number',
+                        action='store',
+                        required=True,
+                        help="AWS Account Number")
+    parser.add_argument('-c', '--cert_id',
+                        dest='cert_id',
+                        action='store',
+                        required=True,
+                        help="ACM Certificate ID")
+    parser.add_argument('-e', '--elb_name',
+                        dest='elb_name',
+                        action='store',
+                        required=True,
+                        help="AWS ELB Name")
+    
+    args = parser.parse_args()
+
     main()
