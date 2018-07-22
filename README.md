@@ -32,7 +32,7 @@ sslswappa.py: error: argument -a/--account_number is required
 Success Output:
 
 ```
-[O] Success! ELB: cphillips-mktg-test's SSL Cert was Updated
+[O] Success! ELB: the-real-cphillips'-test-elb SSL Cert was Updated
 ```
 
 Failure Output:
